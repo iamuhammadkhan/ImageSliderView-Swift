@@ -7,19 +7,32 @@
 //
 
 import UIKit
+import LIHImageSlider
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, LIHSliderDelegate {
+    
+    @IBOutlet weak var sliderView: UIView!
+    
+    let images = [#imageLiteral(resourceName: "1"), #imageLiteral(resourceName: "3"), #imageLiteral(resourceName: "2")]
+    
+    var slider: LIHSlider!
+    var sliderVC: LIHSliderViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        slider = LIHSlider(images: images)
+        
+        sliderVC = LIHSliderViewController(slider: slider)
+        sliderVC.delegate = self
+        sliderVC.view.frame = sliderView.bounds
+        sliderVC.view.center = sliderView.center
+        sliderView.addSubview(sliderVC.view)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func itemPressedAtIndex(index: Int) {
+        //
     }
-
 
 }
 
